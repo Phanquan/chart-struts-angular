@@ -81,7 +81,7 @@ public class ExelDataService {
                 if (row.getRowNum() == 0) continue;
                 data.add(Double.parseDouble(row.getCell(1).toString()));
             }
-            chartSeries.add(new ChartSeries(name,data));
+            chartSeries.add(new ChartSeries(i,name,data));
         }
 
         return chartSeries;

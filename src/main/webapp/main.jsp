@@ -8,26 +8,34 @@
     <script src="common/lib/highcharts/exporting.js"></script>
 </head>
 
-<body ng-app="myApp">
+<body ng-app="exelApp">
 
 
-<div class="container" ng-controller="myCtrl" ng-init="getAllChartData()">
-    <div class="row">
-        <h2>Hello Chart!</h2>
+<div class="container">
+    <div ng-controller="chartCtrl" ng-init="getFullChart()">
+        <div class="row">
+            <h2>Hello Chart!</h2>
+        </div>
+
     </div>
-
-    <div class="row" ng-if="seriesData">
-        <button class="btn btn-primary" ng-repeat="sd in seriesData" ng-click="toggleExelData(sd.id)">{{sd.name}} </button>
-    </div>
-
     <div class="row">
         <div class="col-12" id="ch-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </div>
 
-    <div class="row">
-        <span>
-            {{data | json}}
-        </span>
+
+    <%--<div class="row" ng-if="seriesData">--%>
+    <%--<button class="btn btn-primary" ng-repeat="sd in seriesData" ng-click="toggleExelData(sd.id)">{{sd.name}} </button>--%>
+    <%--</div>--%>
+
+    <div ng-controller="btnCtrl">
+        <div class="row" ng-if="data">
+            <button class="btn btn-primary" ng-repeat="sd in data" ng-click="toggleExelData(sd.id)">{{sd.name}}</button>
+        </div>
+        <div class="row">
+            <span>
+                {{data | json}}
+            </span>
+        </div>
     </div>
 </div>
 

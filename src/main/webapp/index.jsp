@@ -16,11 +16,8 @@
         <h2>Hello Chart!</h2>
     </div>
 
-    <div class="row">
-        <button class="btn btn-primary">Tokyo</button>
-        <button class="btn btn-primary">New York</button>
-        <button class="btn btn-primary">London</button>
-        <button class="btn btn-primary">Berlin</button>
+    <div class="row" ng-if="seriesData">
+        <button class="btn btn-primary" ng-repeat="sd in seriesData" ng-click="toggleExelData(sd.id)">{{sd.name}} </button>
     </div>
 
     <div class="row">
@@ -37,7 +34,7 @@
 
 <script src="common/lib/jquery/dist/jquery.js"></script>
 <script src="common/lib/angular/angular.js"></script>
-<script src="common/js/default-chart.js"></script>
-<script src="common/js/chart.js"></script>
+<%--<script src="common/js/default-chart.js"></script>--%>
+<script src="common/js/js.js"></script>
 </body>
 </html>

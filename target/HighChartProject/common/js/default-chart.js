@@ -1,5 +1,5 @@
 
-let highChart = Highcharts;
+// let highChart = Highcharts;
 
 
 
