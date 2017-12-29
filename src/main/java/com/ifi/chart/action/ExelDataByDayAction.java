@@ -1,7 +1,7 @@
 package com.ifi.chart.action;
 
 
-import com.ifi.chart.model.ChartSeries;
+import com.ifi.chart.model.SeriesData;
 import com.ifi.chart.service.ExelDataService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Action;
@@ -13,29 +13,37 @@ import java.util.List;
 
 @Result(type = "json")
 @ParentPackage("json-default")
-public class ExelDataAction extends ActionSupport {
+public class ExelDataByDayAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
-    private List<ChartSeries> chartSeries;
+    private List<SeriesData> seriesData;
     private String chartTitle;
     private String chartSubTitle;
     private List<String> chartXAxisCate;
     private String chartYAxisTitleText;
 
 
-    public ExelDataAction() {
+    public ExelDataByDayAction() {
         String filePath = "/home/phanquan/IdeaProjects/HighChartProject/tmp/dataByDate.xls";
         chartTitle = "WeeklyPA";
         chartSubTitle = "(W43 24/10/2016 - 30/10/2016)";
         chartXAxisCate = Arrays.asList("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
         chartYAxisTitleText = "Puissance Appelee (kW)";
-        chartSeries = ExelDataService.getchartSeries(filePath);
+        seriesData = ExelDataService.getSeriesDataByDay(filePath);
     }
 
 
-    @Action(value = "/getExelData")
+    @Action(value = "/getExelDataByDay")
     public String execute() {
 
         return SUCCESS;
+    }
+
+    public List<SeriesData> getSeriesData() {
+        return seriesData;
+    }
+
+    public void setSeriesData(List<SeriesData> seriesData) {
+        this.seriesData = seriesData;
     }
 
     public String getChartTitle() {
@@ -68,13 +76,5 @@ public class ExelDataAction extends ActionSupport {
 
     public void setChartYAxisTitleText(String chartYAxisTitleText) {
         this.chartYAxisTitleText = chartYAxisTitleText;
-    }
-
-    public List<ChartSeries> getChartSeries() {
-        return chartSeries;
-    }
-
-    public void setChartSeries(List<ChartSeries> chartSeries) {
-        this.chartSeries = chartSeries;
     }
 }

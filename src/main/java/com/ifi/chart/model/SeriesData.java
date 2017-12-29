@@ -3,15 +3,15 @@ package com.ifi.chart.model;
 
 import java.util.List;
 
-public class ChartSeries {
+public class SeriesData {
     private int id;
     private String name;
     private List<Double> data;
 
-    public ChartSeries() {
+    public SeriesData() {
     }
 
-    public ChartSeries(int id, String name, List<Double> data) {
+    public SeriesData(int id, String name, List<Double> data) {
         this.name = name;
         this.data = data;
         this.id = id;

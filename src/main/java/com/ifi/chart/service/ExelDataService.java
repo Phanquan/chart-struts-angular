@@ -1,7 +1,7 @@
 package com.ifi.chart.service;
 
-import com.ifi.chart.model.ChartSeries;
 import com.ifi.chart.model.ExelData;
+import com.ifi.chart.model.SeriesData;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -62,28 +62,38 @@ public class ExelDataService {
         return listSheet;
     }
 
-    public static List<ChartSeries> getchartSeries(String filePath) {
+    public static List<SeriesData> getSeriesDataByDay(String filePath) {
         HSSFWorkbook workbook = getWorkbookFromFile(filePath);
-
-
-        List<ChartSeries> chartSeries = new ArrayList<ChartSeries>();
-
+        List<SeriesData> seryData = new ArrayList<SeriesData>();
         String name;
         for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
             List<Double> data = new ArrayList<Double>();
             HSSFSheet sheet = workbook.getSheetAt(i);
             Iterator<Row> rowIterator = sheet.rowIterator();
             name = sheet.getSheetName();
-
-            while(rowIterator.hasNext()){
+            while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
                 if (isRowEmpty(row)) break;
                 if (row.getRowNum() == 0) continue;
                 data.add(Double.parseDouble(row.getCell(1).toString()));
             }
-            chartSeries.add(new ChartSeries(i,name,data));
+            seryData.add(new SeriesData(i, name, data));
+        }
+        return seryData;
+    }
+
+    public static List<SeriesData> getSeriesDataByHour(String filePath) {
+        HSSFWorkbook workbook = getWorkbookFromFile(filePath);
+        List<SeriesData> seryData = new ArrayList<SeriesData>();
+        String name;
+        for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
+            List<Double> data = new ArrayList<Double>();
+            HSSFSheet sheet = workbook.getSheetAt(i);
+            for (int j = 1; j < sheet.getPhysicalNumberOfRows(); j++) {
+
+            }
         }
 
-        return chartSeries;
+        return null;
     }
 }

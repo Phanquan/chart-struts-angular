@@ -1,4 +1,4 @@
-
+let chart;
 let opts = {
     chart: {
         renderTo: 'ch-container',
@@ -18,6 +18,14 @@ let opts = {
         column: {
             pointPadding: 0.2,
             borderWidth: 0
+        },
+        series: {
+            cursor: 'pointer',
+            events: {
+                click: function (event) {
+                    console.log(this.userOptions.id)
+                }
+            }
         }
     },
     xAxis: {
@@ -29,7 +37,8 @@ let opts = {
     },
     series: [{}]
 };
-let chart = new Highcharts.chart(opts);
+
+chart = new Highcharts.chart(opts);
 
 
 

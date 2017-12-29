@@ -22,14 +22,9 @@
         <div class="col-12" id="ch-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </div>
 
-
-    <%--<div class="row" ng-if="seriesData">--%>
-    <%--<button class="btn btn-primary" ng-repeat="sd in seriesData" ng-click="toggleExelData(sd.id)">{{sd.name}} </button>--%>
-    <%--</div>--%>
-
     <div ng-controller="btnCtrl">
-        <div class="row" ng-if="data">
-            <button class="btn btn-primary" ng-repeat="sd in data" ng-click="toggleExelData(sd.id,sd.visible)">{{sd.name}}</button>
+        <div class="row" ng-if="data" ng-repeat="sd in data">
+            <button class="btn btn-primary" ng-click="toggleExelData(sd.id,sd.visible)">{{sd.name}}</button>
         </div>
         <div class="row">
             <span>
@@ -37,6 +32,11 @@
             </span>
         </div>
     </div>
+
+    <div>
+
+    </div>
+
 </div>
 
 
