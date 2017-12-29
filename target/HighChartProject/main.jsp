@@ -29,7 +29,7 @@
 
     <div ng-controller="btnCtrl">
         <div class="row" ng-if="data">
-            <button class="btn btn-primary" ng-repeat="sd in data" ng-click="toggleExelData(sd.id)">{{sd.name}}</button>
+            <button class="btn btn-primary" ng-repeat="sd in data" ng-click="toggleExelData(sd.id,sd.visible)">{{sd.name}}</button>
         </div>
         <div class="row">
             <span>
@@ -42,7 +42,7 @@
 
 <script src="common/lib/jquery/dist/jquery.js"></script>
 <script src="common/lib/angular/angular.js"></script>
-<%--<script src="common/js/default-chart.js"></script>--%>
+<script src="common/js/default-chart.js"></script>
 <script src="common/js/js.js"></script>
 </body>
 </html>
