@@ -18,14 +18,6 @@ let opts = {
         column: {
             pointPadding: 0.2,
             borderWidth: 0
-        },
-        series: {
-            cursor: 'pointer',
-            events: {
-                click: function (event) {
-                    console.log(this.userOptions.id)
-                }
-            }
         }
     },
     xAxis: {
@@ -37,7 +29,51 @@ let opts = {
     },
     series: [{}]
 };
-
+let opts2 = {
+    chart: {
+        renderTo:'container2',
+        type: 'area'
+    },
+    title: {
+        text: ''
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: [],
+        tickmarkPlacement: 'on',
+        title: {
+            enabled: false
+        }
+    },
+    yAxis: {
+        title: {
+            text: ''
+        },
+        labels: {
+            formatter: function () {
+                return this.value;
+            }
+        }
+    },
+    tooltip: {
+        split: true,
+        valueSuffix: ' kW'
+    },
+    plotOptions: {
+        area: {
+            stacking: 'normal',
+            lineColor: '#666666',
+            lineWidth: 1,
+            marker: {
+                lineWidth: 1,
+                lineColor: '#666666'
+            }
+        }
+    },
+    series: []
+};
 chart = new Highcharts.chart(opts);
 
 

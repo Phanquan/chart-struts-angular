@@ -3,6 +3,8 @@ package com.ifi.chart.service;
 import com.ifi.chart.model.ExelData;
 import com.ifi.chart.model.SeriesData;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -64,7 +66,7 @@ public class ExelDataService {
 
     public static List<SeriesData> getSeriesDataByDay(String filePath) {
         HSSFWorkbook workbook = getWorkbookFromFile(filePath);
-        List<SeriesData> seryData = new ArrayList<SeriesData>();
+        List<SeriesData> listDataByDay = new ArrayList<SeriesData>();
         String name;
         for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
             List<Double> data = new ArrayList<Double>();
@@ -77,23 +79,32 @@ public class ExelDataService {
                 if (row.getRowNum() == 0) continue;
                 data.add(Double.parseDouble(row.getCell(1).toString()));
             }
-            seryData.add(new SeriesData(i, name, data));
+            listDataByDay.add(new SeriesData(i, name, data));
         }
-        return seryData;
+        return listDataByDay;
     }
 
-    public static List<SeriesData> getSeriesDataByHour(String filePath) {
+    public static List<List<List<SeriesData>>> getSeriesDataByHour(String filePath) {
         HSSFWorkbook workbook = getWorkbookFromFile(filePath);
-        List<SeriesData> seryData = new ArrayList<SeriesData>();
-        String name;
+        List<List<List<SeriesData>>> listDataByHour = new ArrayList<List<List<SeriesData>>>();
+        String namePA = "PA";
+        String namePS = "PS";
         for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
-            List<Double> data = new ArrayList<Double>();
+            List<List<SeriesData>> listDataPerSheet = new ArrayList<List<SeriesData>>();
             HSSFSheet sheet = workbook.getSheetAt(i);
-            for (int j = 1; j < sheet.getPhysicalNumberOfRows(); j++) {
-
+            for (int j = 1; j < sheet.getPhysicalNumberOfRows(); j += 24) {
+                List<Double> dataPA = new ArrayList<Double>();
+                List<Double> dataPS = new ArrayList<Double>();
+                for (int k = j; k < j + 24; k++) {
+                    HSSFRow row = sheet.getRow(k);
+                    dataPA.add(Double.parseDouble(row.getCell(1).toString().replaceAll("\\D+", "")));
+                    dataPS.add(Double.parseDouble(row.getCell(2).toString().replaceAll("\\D+", "")));
+                }
+                listDataPerSheet.add(Arrays.asList(new SeriesData(j,namePA,dataPA),new SeriesData(j,namePS,dataPS)));
             }
+            listDataByHour.add(listDataPerSheet);
         }
 
-        return null;
+        return listDataByHour;
     }
 }

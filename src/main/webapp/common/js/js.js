@@ -8,8 +8,8 @@ app.controller('chartCtrl', function ($scope, $rootScope, $http) {
                 $scope.data.seriesData.forEach(function(item){
                     item.visible = true;
                 });
-                let newOptions = setOptions($scope.data);
-                chart = Highcharts.chart(newOptions);
+                let newOptions = setOptions($scope.data,$http);
+                chart = new Highcharts.chart(newOptions);
                 $rootScope.$broadcast("emitChartData", $scope.data.seriesData);
             })
     }
@@ -35,12 +35,44 @@ app.controller('btnCtrl', function ($scope, $rootScope) {
 
 })
 
-function setOptions(data) {
+function setOptions(data,$http) {
     let options = opts;
     options.title.text = data.chartTitle;
     options.subtitle.text = data.chartSubTitle;
     options.xAxis.categories = data.chartXAxisCate;
     options.yAxis.title.text = data.chartYAxisTitleText;
     options.series = data.seriesData;
+    options.plotOptions.series = {
+        cursor: 'pointer',
+        events: {
+            click: function (event) {
+                let indexOfSheet = this.columnIndex;
+                let indexOfColumn = event.point.x;
+                $http.get("getExelDataByHour")
+                    .then(function(res) {
+                        let newOptions2 = setOptions2(res.data,indexOfSheet,indexOfColumn);
+                        chart = new Highcharts.chart(newOptions2);
+                    })
+            }
+        }
+    }
+    return options;
+}
+
+function setOptions2(data,y,x) {
+    let options = opts2;
+    options.title.text = data.chartTitle;
+    options.xAxis.categories = data.chartXAxisCate;
+    options.yAxis.title.text = data.chartYAxisTitleText;
+    data.seriesDataByHour.forEach(function(item,i){
+        if (i === y) {
+            item.forEach(function(ele,j){
+                if (j === x) {
+                    console.log(ele);
+                    options.series = ele;
+                }
+            })
+        }
+    })
     return options;
 }
