@@ -51,7 +51,7 @@ function setOptions(data,$http) {
                 $http.get("getExelDataByHour")
                     .then(function(res) {
                         let newOptions2 = setOptions2(res.data,indexOfSheet,indexOfColumn);
-                        chart = new Highcharts.chart(newOptions2);
+                        let chart2 = new Highcharts.chart(newOptions2);
                     })
             }
         }
@@ -68,7 +68,8 @@ function setOptions2(data,y,x) {
         if (i === y) {
             item.forEach(function(ele,j){
                 if (j === x) {
-                    console.log(ele);
+                    console.log(ele)
+                    ele[0].type = "area";
                     options.series = ele;
                 }
             })

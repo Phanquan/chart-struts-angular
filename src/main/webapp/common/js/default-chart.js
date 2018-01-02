@@ -32,7 +32,7 @@ let opts = {
 let opts2 = {
     chart: {
         renderTo:'container2',
-        type: 'area'
+        type: 'line'
     },
     title: {
         text: ''

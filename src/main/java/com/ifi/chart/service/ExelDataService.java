@@ -97,8 +97,8 @@ public class ExelDataService {
                 List<Double> dataPS = new ArrayList<Double>();
                 for (int k = j; k < j + 24; k++) {
                     HSSFRow row = sheet.getRow(k);
-                    dataPA.add(Double.parseDouble(row.getCell(1).toString().replaceAll("\\D+", "")));
-                    dataPS.add(Double.parseDouble(row.getCell(2).toString().replaceAll("\\D+", "")));
+                    dataPA.add(Double.parseDouble(row.getCell(1).toString().replaceAll("[^.0-9]+", "")));
+                    dataPS.add(Double.parseDouble(row.getCell(2).toString().replaceAll("[^.0-9]+", "")));
                 }
                 listDataPerSheet.add(Arrays.asList(new SeriesData(j,namePA,dataPA),new SeriesData(j,namePS,dataPS)));
             }
