@@ -12,31 +12,22 @@
 
 
 <div class="container">
-    <div ng-controller="chartCtrl" ng-init="getFullChart()">
-        <div class="row">
-            <h2>Hello Chart!</h2>
+    <div class="row">
+        <div ng-controller="chartCtrl" ng-init="getFullChart()">
         </div>
-
     </div>
     <div class="row">
-        <div class="col-12" id="ch-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    </div>
-
-    <div ng-controller="btnCtrl">
-        <div class="row" ng-if="data" ng-repeat="sd in data">
-            <button class="btn btn-primary" ng-click="toggleExelData(sd.id,sd.visible)">{{sd.name}}</button>
+        <div class="col-sm-2" ng-controller="btnCtrl">
+            <div ng-if="data" ng-repeat="sd in data">
+                <button class="btn btn-primary" ng-click="toggleExelData(sd.id,sd.visible)">{{sd.name}}</button>
+            </div>
         </div>
-        <div class="row">
-            <span>
-                {{data | json}}
-            </span>
+
+        <div class="col-sm-10">
+            <div id="ch-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-12" id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    </div>
-
 </div>
 
 
