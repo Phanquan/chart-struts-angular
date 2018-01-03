@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>High Chart</title>
     <link rel="stylesheet" href="common/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="common/css/main.css">
     <script src="common/lib/highcharts/highcharts.js"></script>
     <script src="common/lib/highcharts/exporting.js"></script>
 </head>
@@ -19,7 +20,7 @@
     <div class="row">
         <div class="col-sm-2" ng-controller="btnCtrl">
             <div ng-if="data" ng-repeat="sd in data">
-                <button class="btn btn-primary" ng-click="toggleExelData(sd.id,sd.visible)">{{sd.name}}</button>
+                <button id="btnOke" class="btn btn-primary" ng-click="toggleExelData(sd.id,sd.visible)">{{sd.name}}</button>
             </div>
         </div>
 

@@ -68,7 +68,7 @@ function setOptions2(data,y,x) {
         if (i === y) {
             item.forEach(function(ele,j){
                 if (j === x) {
-                    console.log(ele)
+                    // console.log(ele)
                     ele[0].type = "area";
                     options.series = ele;
                 }
